@@ -25,3 +25,35 @@ public:
         return rotateRight(temp,k-1);
     }
 };
+
+//O(N)
+class Solution {
+public:
+    ListNode* rotateRight(ListNode* head, int k) {
+        if(head==NULL || head->next==NULL || k==0)
+            return head;
+        ListNode* h=head;
+        int len=0;
+        while(h){
+            len++;
+            h=h->next;
+        }
+        k=k%len;
+        if(k==0)
+            return head;
+        int i=len-k;
+        h=head;
+        while(i>1){
+            h=h->next;
+            i--;
+        }
+        ListNode* temp=h->next;
+        ListNode* ans = temp;
+        h->next=NULL;
+        while(temp->next){
+            temp=temp->next;
+        }
+        temp->next=head;
+    return ans;
+    }
+};
